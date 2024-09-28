@@ -1,10 +1,10 @@
 
---let's access the excel data imported 
+--let's access the Excel data imported 
 
 Select *
 FROM [Portfolio project]..PS
 
---change the type of all columns that contain financial - numerical information to real numbers with 2 decimal digits
+--change the type of all columns that contain financial/numerical information to real numbers with 2 decimal digits
 
 ALTER TABLE [Portfolio project]..PS
 ALTER COLUMN amount DECIMAL(20,2);
@@ -28,19 +28,19 @@ SELECT *
 FROM [Portfolio project]..PS
 WHERE isFlaggedFraud = 1;
 
---table is empty and therefore flagged fraud is never true 
+--the table is empty and therefore flagged fraud is never true 
 --fraud transactions only exist when isFraud is true
 
 
 
---count total number of fraud transactions
+--count the total number of fraud transactions
 
 SELECT COUNT(*) AS total_fraudulent_transactions
 FROM [Portfolio project]..PS
 WHERE isFraud = 1;
 
 
--- total and average amount of money legally transformed per method 
+-- the total and average amount of money legally transformed per method 
 
 SELECT type, SUM(amount) AS total_amount, CAST(AVG(amount) AS DECIMAL(20,2)) AS average_amount
 FROM [Portfolio project]..PS
@@ -49,7 +49,7 @@ GROUP BY type
 ORDER BY total_amount DESC;
 
 
---total and average amount of money illegally transformed per method
+--the total and average amount of money illegally transformed per method
 
 SELECT type, SUM(amount) AS total_amount, CAST(AVG(amount) AS DECIMAL(20,2)) AS average_amount
 FROM [Portfolio project]..PS
@@ -73,15 +73,15 @@ AND isFraud=0;
 
 
 
--- show the 5 highest amounts of money transisioned 
+-- show the 5 highest amounts of money transitioned 
 SELECT TOP 5 *
 FROM [Portfolio project]..PS
 ORDER BY amount DESC;
 
--- can see that only one transaction is legal, the rest 80% is fraud
+-- can see that only one transaction is legal, the remaining 80% is fraud
 
 
---In the website Kaggle that I got the data from, it was mentioned that all nameDest starting with M will have null data entries in the columns new and old balance destinations
+--In the website Kaggle that I got the data from, it was mentioned that all nameDest starting with M have null data entries in the columns new and old balance destinations
 
 SELECT *
 FROM [Portfolio project]..PS
