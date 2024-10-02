@@ -40,7 +40,7 @@ FROM [Portfolio project]..PS
 WHERE isFraud = 1;
 
 
--- the total and average amount of money legally transformed per method 
+-- Find the total and average amount of money legally transformed per method 
 
 SELECT type, SUM(amount) AS total_amount, CAST(AVG(amount) AS DECIMAL(20,2)) AS average_amount
 FROM [Portfolio project]..PS
@@ -49,7 +49,7 @@ GROUP BY type
 ORDER BY total_amount DESC;
 
 
---the total and average amount of money illegally transformed per method
+--find the total and average amount of money illegally transformed per method
 
 SELECT type, SUM(amount) AS total_amount, CAST(AVG(amount) AS DECIMAL(20,2)) AS average_amount
 FROM [Portfolio project]..PS
@@ -81,13 +81,13 @@ ORDER BY amount DESC;
 -- can see that only one transaction is legal, the remaining 80% is fraud
 
 
---In the website Kaggle that I got the data from, it was mentioned that all nameDest starting with M have null data entries in the columns new and old balance destinations
+--From the website Kaggle, it was mentioned that all nameDest starting with 'M' have null data entries in the columns new and old balance destinations
 
 SELECT *
 FROM [Portfolio project]..PS
 WHERE nameDest NOT LIKE 'M%';
 
---create a new table that has all the information from all name destinations apart from those that start with the letter M
+--create a new table containing all the information from all name destinations apart from those that start with the letter M
 
 SELECT *
 INTO [Portfolio project]..PSNotM 
